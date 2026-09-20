@@ -51,6 +51,11 @@ jobs:
     container: python:3.6.15-bullseye
     steps:
     - uses: actions/checkout@v4
+    - name: Install test system dependencies
+      # Custom runner tests invoke the external time command.
+      run: |
+        apt-get update
+        apt-get install -y --no-install-recommends time
     - name: Install Python 3.6 compatible tools
       run: |
         python -m pip install --upgrade pip==21.3.1
